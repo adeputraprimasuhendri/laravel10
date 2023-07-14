@@ -1,0 +1,23 @@
+version: '2'
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    volumes:
+      - ./app/:/var/www/app
+    links:
+      - app
+    ports:
+      - 8080:80
+  laravel:
+    container_name: laravel
+    build:
+      args:
+        user: admin
+        uid: 1000
+      context: ./
+      dockerfile: app.dockerfile
+    volumes:
+      - ./app/:/var/www/app
