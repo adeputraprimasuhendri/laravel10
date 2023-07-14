@@ -1,16 +1,5 @@
 version: '2'
 services:
-  nginx:
-    container_name: nginx
-    build:
-      context: ./
-      dockerfile: web.dockerfile
-    volumes:
-      - ./app/:/var/www/app
-    links:
-      - app
-    ports:
-      - 8080:80
   laravel:
     container_name: laravel
     build:
@@ -21,3 +10,6 @@ services:
       dockerfile: app.dockerfile
     volumes:
       - ./app/:/var/www/app
+    command: 'php artisan serve --host=0.0.0.0'
+    ports:
+      - 8000:8000
